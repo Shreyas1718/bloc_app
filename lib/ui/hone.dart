@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           return Material(
             child: Scaffold(
               appBar: AppBar(
-                title: Text("Cricket"),
+                title: Text("Bloc App"),
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(Icons.refresh),
@@ -99,22 +99,12 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             child: ListTile(
-              leading: ClipOval(
-                child: Hero(
-                  tag: articles[pos].urlToImage,
-                  child: Image.network(
-                    articles[pos].urlToImage,
-                    fit: BoxFit.cover,
-                    height: 70.0,
-                    width: 70.0,
-                  ),
-                ),
-              ),
-              title: Text(articles[pos].title),
-              subtitle: Text(articles[pos].publishedAt),
+
+              title: Text(articles[pos].category),
+              subtitle: Text(articles[pos].description),
             ),
             onTap: () {
-              navigateToArticleDetailPage(context, articles[pos]);
+
             },
           ),
         );
@@ -122,13 +112,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void navigateToArticleDetailPage(BuildContext context, Articles article) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ArticleDetailPage(
-        article: article,
-      );
-    }));
-  }
+
 
 
 }
@@ -136,40 +120,3 @@ class _HomePageState extends State<HomePage> {
 
 
 
-class ArticleDetailPage extends StatelessWidget {
-  Articles article;
-
-  ArticleDetailPage({this.article});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Cricket"),
-      ),
-      body: ListView(
-        padding: EdgeInsets.all(5.0),
-        children: <Widget>[
-          Hero(
-            tag: article.urlToImage,
-            child: Image.network(article.urlToImage),
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(10.0),
-            child: Text(
-              article.title,
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ),
-          Container(
-            alignment: Alignment.topRight,
-            margin: EdgeInsets.all(5.0),
-            child: Text(article.publishedAt),
-          ),
-          Text(article.content),
-        ],
-      ),
-    );
-  }
-}

@@ -14,7 +14,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
     var response = await http.get(AppStrings.cricArticleUrl);
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      List<Articles> articles = ApiResultModel.fromJson(data).articles;
+      List<Articles> articles = ApiResultModel.fromJson(data).entries;
       return articles;
     } else {
       throw Exception();
